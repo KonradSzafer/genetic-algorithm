@@ -1,8 +1,9 @@
 import random
 import numpy as np
+from typing import List, Dict
 
 
-def creation(params_ranges, floating_point=True):
+def creation(params_ranges: Dict[str,List], floating_point: bool = True) -> List:
     parameters_ranges = params_ranges.copy()
     individual = []
     for name, ranges in parameters_ranges.items():
@@ -15,7 +16,11 @@ def creation(params_ranges, floating_point=True):
     return individual
 
 
-def mutation(params_ranges, best_individual, mutation_rate=0.5, floating_point=True):
+def mutation(params_ranges: Dict[str,List],
+            best_individual: List,
+            mutation_rate: float = 0.5,
+            floating_point: bool = True) -> List:
+
     parameters_ranges = params_ranges.copy()
     parent = best_individual.copy()
     offspring = []
@@ -52,7 +57,11 @@ def mutation(params_ranges, best_individual, mutation_rate=0.5, floating_point=T
     return offspring
 
 
-def crossover(params_ranges, parent_a, parent_b, floating_point=True):
+def crossover(  params_ranges: Dict[str,List],
+                parent_a: List,
+                parent_b: List,
+                floating_point: bool = True) -> List:
+
     parameters_ranges = params_ranges.copy()
     offspring = []
     idx = 0
@@ -84,9 +93,9 @@ def crossover(params_ranges, parent_a, parent_b, floating_point=True):
 if __name__ == '__main__':
 
     params_ranges = {
-                    'x': (-10, 10),
-                    'y': (-30, 30),
-                    'z': (0, 50) }
+                    'x': [-10, 10],
+                    'y': [-30, 30],
+                    'z': [0, 50] }
 
     best_individual = [9, 10, 43, np.nan]
 

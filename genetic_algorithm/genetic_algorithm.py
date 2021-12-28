@@ -3,6 +3,7 @@ import time
 import random
 import numpy as np
 import numpy.typing as npt
+from typing import Union, Callable, List, Dict
 
 from rich.table import Column
 from rich.progress import Progress, BarColumn, TextColumn
@@ -12,16 +13,17 @@ from reproduction import creation, mutation, crossover
 class GA:
 
     def __init__(self,
-                generations_count, population_count,
-                function,
-                parameters_ranges,
-                fitness_treshold=None,
-                maximise=False,
-                floating_point=False,
-                stochastic=False,
-                stochastic_iterations=3,
-                crossover_percentage=0.3,
-                mutation_percentage=0.7) -> None:
+                generations_count: int,
+                population_count: int,
+                function: Callable,
+                parameters_ranges: Dict[str,List],
+                fitness_treshold: int = None,
+                maximise: bool = False,
+                floating_point: bool = False,
+                stochastic: bool = False,
+                stochastic_iterations: int = 3,
+                crossover_percentage: float = 0.3,
+                mutation_percentage: float = 0.7) -> None:
 
         # general
         self.generations_count = generations_count
@@ -64,7 +66,7 @@ class GA:
             raise
 
 
-    def __print_population(self, population):
+    def __print_population(self, population: List) -> List:
         for key in self.parameters_ranges:
             print(' ', key, end=' ')
         print(' fitness')
@@ -72,7 +74,7 @@ class GA:
             print(individual)
 
 
-    def __create_population(self):
+    def __create_population(self) -> List:
         population = []
         for _ in range(self.population_count):
             individual = creation(self.parameters_ranges, floating_point=self.floating_point)
@@ -81,7 +83,7 @@ class GA:
         return population
 
 
-    def __calculate_fitness(self, population):
+    def __calculate_fitness(self, population: List) -> None:
         for idx in range(self.population_count):
             individual_fitness = np.nan
             individual = population[idx].copy()
@@ -105,7 +107,7 @@ class GA:
             population[idx][-1] = individual_fitness
 
 
-    def __get_best_individual(self, population):
+    def __get_best_individual(self, population: List) -> Union[List,int]:
         best_individual = population[0].copy()
         self.best_individual = best_individual
         best_fitness = best_individual[-1]
@@ -114,7 +116,7 @@ class GA:
         return best_individual, best_fitness
 
 
-    def __reproduce_population(self, population):
+    def __reproduce_population(self, population: List) -> None:
 
         best_count = 1
         crossover_count = int(self.population_count * self.crossover_percentage) - 1
@@ -161,7 +163,7 @@ class GA:
             population[i] = offspring
 
 
-    def evolve(self, stop_value=None, verbose=True) -> None:
+    def evolve(self, stop_value = None, verbose: bool = True) -> None:
 
         start_time = time.time()
         population = self.__create_population()
@@ -202,21 +204,21 @@ class GA:
         self.evolution_time = np.round(self.evolution_time, 2)
 
 
-    def get_evolution_time(self):
+    def get_evolution_time(self) -> float:
 
         return self.evolution_time
 
 
-    def get_learning_curve(self):
+    def get_learning_curve(self) -> List:
 
         return self.fitness_array
 
 
-    def get_best(self):
+    def get_best(self) -> List:
 
         return self.best_individual
 
 
-    def get_best_fitness(self):
+    def get_best_fitness(self) -> float:
 
         return self.fitness_array[-1]
