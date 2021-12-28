@@ -56,15 +56,15 @@ class GA:
         self.fitness_array = []
         self.best_individual = []
 
-        # error check
+        # validating arguments
         for name, ranges in self.parameters_ranges.items():
             min_val, max_val = ranges
             if min_val >= max_val:
-                raise
+                raise ValueError('Incorrect format of parameter ranges.')
 
         total_percentage = crossover_percentage + mutation_percentage
         if total_percentage > 1:
-            raise
+            raise ValueError('The values assigned to crossover_percentage and mutation_percentage are too large.')
 
 
     def __print_population(self, population: List) -> List:
