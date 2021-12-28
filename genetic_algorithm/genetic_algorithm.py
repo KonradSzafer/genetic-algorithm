@@ -204,16 +204,6 @@ class GA:
         self.evolution_time = np.round(self.evolution_time, 2)
 
 
-    def get_evolution_time(self) -> float:
-
-        return self.evolution_time
-
-
-    def get_learning_curve(self) -> List:
-
-        return self.fitness_array
-
-
     def get_best(self) -> List:
 
         return self.best_individual
@@ -222,3 +212,13 @@ class GA:
     def get_best_fitness(self) -> float:
 
         return self.fitness_array[-1]
+
+
+    def get_evolution_time(self) -> float:
+
+        return self.evolution_time
+
+
+    def get_learning_curve(self) -> List:
+
+        return self.fitness_array
