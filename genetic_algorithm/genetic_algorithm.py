@@ -52,6 +52,7 @@ class GA:
 
         # results
         self.evolution_time = np.nan
+        self.searched = []
         self.fitness_array = []
         self.best_individual = []
 
@@ -104,6 +105,7 @@ class GA:
                     if individual_fitness < self.fitness_treshold:
                         self.treshold_reached =  True
 
+            self.searched.append(individual + [individual_fitness])
             population[idx][-1] = individual_fitness
 
 
@@ -222,3 +224,12 @@ class GA:
     def get_learning_curve(self) -> List:
 
         return self.fitness_array
+
+
+    def get_searched_list(self, include_fitness: bool = False) -> List:
+
+        searched_list = self.searched.copy()
+        if not include_fitness:
+            for i in searched_list:
+                searched_list.pop()
+        return searched_list

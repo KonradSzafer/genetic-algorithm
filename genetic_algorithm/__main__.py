@@ -25,15 +25,25 @@ if __name__ == '__main__':
 
     GeneticAlgorithm.evolve( verbose=True )
 
+    result = GeneticAlgorithm.get_best()
+    print('\nResult', result)
+
+    best_fitness = GeneticAlgorithm.get_best_fitness()
+    print('Best fitness', best_fitness)
+
     optymalization_time = GeneticAlgorithm.get_evolution_time()
-    print('\nOptymalization time:', optymalization_time, 's')
+    print('Optymalization time:', optymalization_time, 's\n')
 
     learning_curve = GeneticAlgorithm.get_learning_curve()
     plt.plot(learning_curve)
     plt.show()
 
-    result = GeneticAlgorithm.get_best()
-    print('Result', result)
-
-    best_fitness = GeneticAlgorithm.get_best_fitness()
-    print('Best fitness', best_fitness)
+    # searched_list = GeneticAlgorithm.get_searched_list()
+    # fig = plt.figure()
+    # ax = plt.axes(projection='3d')
+    # for i in searched_list:
+    #     ax.scatter(i[0], i[1], i[2], color='red')
+    # ax.set_xlabel('x')
+    # ax.set_ylabel('y')
+    # ax.set_zlabel('z')
+    # plt.show()
