@@ -3,11 +3,11 @@ import numpy as np
 from typing import List, Dict
 
 
-def creation(params_ranges: Dict[str,List], floating_point: bool = True) -> List:
-    parameters_ranges = params_ranges.copy()
+def creation(params_bounds: Dict[str,List], floating_point: bool = True) -> List:
+    parameters_bounds = params_bounds.copy()
     individual = []
-    for name, ranges in parameters_ranges.items():
-        min_val, max_val = ranges
+    for name, bounds in parameters_bounds.items():
+        min_val, max_val = bounds
         if floating_point:
             gene = np.random.uniform(min_val, max_val)
         else:
@@ -16,18 +16,18 @@ def creation(params_ranges: Dict[str,List], floating_point: bool = True) -> List
     return individual
 
 
-def mutation(params_ranges: Dict[str,List],
+def mutation(params_bounds: Dict[str,List],
             best_individual: List,
             mutation_rate: float = 0.5,
             floating_point: bool = True) -> List:
 
-    parameters_ranges = params_ranges.copy()
+    parameters_bounds = params_bounds.copy()
     parent = best_individual.copy()
     offspring = []
     idx = 0
-    for name, ranges in parameters_ranges.items():
+    for name, bounds in parameters_bounds.items():
 
-        min_val, max_val = ranges
+        min_val, max_val = bounds
         abs_range = abs(max_val - min_val)
 
         if floating_point:
@@ -57,16 +57,16 @@ def mutation(params_ranges: Dict[str,List],
     return offspring
 
 
-def crossover(  params_ranges: Dict[str,List],
+def crossover(  params_bounds: Dict[str,List],
                 parent_a: List,
                 parent_b: List,
                 floating_point: bool = True) -> List:
 
-    parameters_ranges = params_ranges.copy()
+    parameters_bounds = params_bounds.copy()
     offspring = []
     idx = 0
-    for name, ranges in parameters_ranges.items():
 
+    for name, bounds in parameters_bounds.items():
         gene_a = parent_a[idx]
         gene_b = parent_b[idx]
         abs_range = abs(gene_a - gene_b)
@@ -92,17 +92,17 @@ def crossover(  params_ranges: Dict[str,List],
 
 if __name__ == '__main__':
 
-    params_ranges = {
+    params_bounds = {
                     'x': [-10, 10],
                     'y': [-30, 30],
                     'z': [0, 50] }
 
     best_individual = [9, 10, 43, np.nan]
 
-    offspring = mutation(params_ranges, best_individual)
+    offspring = mutation(params_bounds, best_individual)
     print(offspring)
 
     individual = [-9, 0, 30, np.nan]
 
-    offspring = crossover(params_ranges, best_individual, individual)
+    offspring = crossover(params_bounds, best_individual, individual)
     print(offspring)

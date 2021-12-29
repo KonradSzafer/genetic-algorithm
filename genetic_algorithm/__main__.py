@@ -7,7 +7,7 @@ def function(x, y, z):
 
 if __name__ == '__main__':
 
-    params_ranges = {
+    bounds = {
                     'x': [-10, 10],
                     'y': [-30, 30],
                     'z': [0, 50] }
@@ -15,7 +15,7 @@ if __name__ == '__main__':
     GeneticAlgorithm = GA(  generations_count=100,
                             population_count=200,
                             function=function,
-                            parameters_ranges=params_ranges,
+                            params_bounds=bounds,
                             maximise=True,
                             floating_point=True,
                             stochastic=False,
@@ -38,7 +38,7 @@ if __name__ == '__main__':
     plt.plot(learning_curve)
     plt.show()
 
-    searched_list = GeneticAlgorithm.get_searched_list()
+    # searched_list = GeneticAlgorithm.get_searched_list()
     # fig = plt.figure()
     # ax = plt.axes(projection='3d')
     # for i in searched_list:

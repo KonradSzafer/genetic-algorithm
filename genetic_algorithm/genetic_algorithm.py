@@ -16,7 +16,7 @@ class GA:
                 generations_count: int,
                 population_count: int,
                 function: Callable,
-                parameters_ranges: Dict[str,List],
+                params_bounds: Dict[str,List],
                 fitness_treshold: int = None,
                 maximise: bool = False,
                 floating_point: bool = False,
@@ -30,16 +30,16 @@ class GA:
         self.generations_count = generations_count
         self.population_count = population_count
         self.function = function
-        self.parameters_ranges = parameters_ranges
-        self.parameters_count = len(parameters_ranges)
+        self.parameters_bounds = params_bounds
+        self.parameters_count = len(params_bounds)
         self.fitness_treshold = fitness_treshold
         self.treshold_reached = False
 
-        for name, ranges in self.parameters_ranges.items():
+        for name, bounds in self.parameters_bounds.items():
             if floating_point:
-                ranges[1] += 1e-6
+                bounds[1] += 1e-6
             else:
-                ranges[1] += 1
+                bounds[1] += 1
 
         # advanced
         self.maximise = maximise
@@ -61,10 +61,10 @@ class GA:
         self.best_individual = []
 
         # validating arguments
-        for name, ranges in self.parameters_ranges.items():
-            min_val, max_val = ranges
+        for name, bounds in self.parameters_bounds.items():
+            min_val, max_val = bounds
             if min_val >= max_val:
-                raise ValueError('Incorrect format of parameter ranges.')
+                raise ValueError('Incorrect format of parameter bounds.')
 
         total_percentage = crossover_percentage + mutation_percentage
         if total_percentage > 1:
@@ -72,7 +72,7 @@ class GA:
 
 
     def __print_population(self, population: List) -> List:
-        for key in self.parameters_ranges:
+        for key in self.parameters_bounds:
             print(' ', key, end=' ')
         print(' fitness')
         for individual in population:
@@ -82,7 +82,7 @@ class GA:
     def __create_population(self) -> List:
         population = []
         for _ in range(self.population_count):
-            individual = creation(self.parameters_ranges, floating_point=self.floating_point)
+            individual = creation(self.parameters_bounds, floating_point=self.floating_point)
             individual.append(np.nan)
             population.append(individual)
         return population
@@ -138,7 +138,7 @@ class GA:
             parent_a = best_individual
             parent_b = population[i].copy()
 
-            offspring = crossover(  self.parameters_ranges,
+            offspring = crossover(  self.parameters_bounds,
                                     parent_a,
                                     parent_b,
                                     floating_point=self.floating_point)
@@ -151,7 +151,7 @@ class GA:
         end = start + mutation_count
         for i in range(start, end):
 
-            offspring = mutation(self.parameters_ranges,
+            offspring = mutation(self.parameters_bounds,
                                 best_individual,
                                 floating_point=self.floating_point)
 
@@ -163,7 +163,7 @@ class GA:
         end = self.population_count
         for i in range(start, end):
 
-            offspring = creation(self.parameters_ranges, floating_point=self.floating_point)
+            offspring = creation(self.parameters_bounds, floating_point=self.floating_point)
 
             offspring.append(np.nan)
             population[i] = offspring
