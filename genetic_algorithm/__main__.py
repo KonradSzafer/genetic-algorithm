@@ -8,9 +8,9 @@ def function(x, y, z):
 if __name__ == '__main__':
 
     params_ranges = {
-                    'x': (-10, 10),
-                    'y': (-30, 30),
-                    'z': (0, 50) }
+                    'x': [-10, 10],
+                    'y': [-30, 30],
+                    'z': [0, 50] }
 
     GeneticAlgorithm = GA(  generations_count=100,
                             population_count=200,

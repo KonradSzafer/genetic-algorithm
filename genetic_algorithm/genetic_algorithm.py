@@ -21,6 +21,7 @@ class GA:
                 maximise: bool = False,
                 floating_point: bool = False,
                 stochastic: bool = False,
+                complex_function: bool = False,
                 stochastic_iterations: int = 3,
                 crossover_percentage: float = 0.3,
                 mutation_percentage: float = 0.7) -> None:
@@ -34,8 +35,10 @@ class GA:
         self.fitness_treshold = fitness_treshold
         self.treshold_reached = False
 
-        if not floating_point:
-            for name, ranges in self.parameters_ranges.items():
+        for name, ranges in self.parameters_ranges.items():
+            if floating_point:
+                ranges[1] += 1e-6
+            else:
                 ranges[1] += 1
 
         # advanced
@@ -43,6 +46,7 @@ class GA:
         self.floating_point = floating_point
         self.stochastic = stochastic
         self.stochastic_iterations = stochastic_iterations
+        self.complex_function = complex_function
         self.crossover_percentage = crossover_percentage
         self.mutation_percentage = mutation_percentage
 
