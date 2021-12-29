@@ -66,6 +66,10 @@ class GA:
             if min_val >= max_val:
                 raise ValueError('Incorrect format of parameter bounds.')
 
+        if self.stochastic:
+            if self.stochastic_iterations < 3:
+                raise ValueError('Number of stochastic iterations is to small.')
+
         total_percentage = crossover_percentage + mutation_percentage
         if total_percentage > 1:
             raise ValueError('The values assigned to crossover_percentage and mutation_percentage are too large.')
