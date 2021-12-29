@@ -52,7 +52,7 @@ class GA:
 
         # results
         self.evolution_time = np.nan
-        self.searched = []
+        self.searched = set()
         self.fitness_array = []
         self.best_individual = []
 
@@ -105,7 +105,7 @@ class GA:
                     if individual_fitness < self.fitness_treshold:
                         self.treshold_reached =  True
 
-            self.searched.append(individual + [individual_fitness])
+            self.searched.add(tuple(individual + [individual_fitness]))
             population[idx][-1] = individual_fitness
 
 
@@ -228,7 +228,8 @@ class GA:
 
     def get_searched_list(self, include_fitness: bool = False) -> List:
 
-        searched_list = self.searched.copy()
+        searched_list = list(self.searched.copy())
+        searched_list = [list(solution) for solution in searched_list]
         if not include_fitness:
             for i in searched_list:
                 searched_list.pop()

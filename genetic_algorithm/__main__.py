@@ -38,7 +38,7 @@ if __name__ == '__main__':
     plt.plot(learning_curve)
     plt.show()
 
-    # searched_list = GeneticAlgorithm.get_searched_list()
+    searched_list = GeneticAlgorithm.get_searched_list()
     # fig = plt.figure()
     # ax = plt.axes(projection='3d')
     # for i in searched_list:
