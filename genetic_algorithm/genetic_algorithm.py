@@ -18,7 +18,7 @@ class GA:
                 function: Callable,
                 params_bounds: Dict[str,List],
                 fitness_treshold: int = None,
-                maximise: bool = False,
+                maximize: bool = False,
                 floating_point: bool = False,
                 stochastic: bool = False,
                 stochastic_iterations: int = 3,
@@ -42,7 +42,7 @@ class GA:
                 bounds[1] += 1
 
         # advanced
-        self.maximise = maximise
+        self.maximize = maximize
         self.floating_point = floating_point
         self.stochastic = stochastic
         self.stochastic_iterations = stochastic_iterations
@@ -106,7 +106,7 @@ class GA:
                 individual_fitness = self.function( *individual )
 
             if self.fitness_treshold is not None:
-                if self.maximise:
+                if self.maximize:
                     if individual_fitness > self.fitness_treshold:
                         self.treshold_reached =  True
                 else:
@@ -189,7 +189,7 @@ class GA:
 
                 population = sorted(population,
                                     key=lambda x: x[-1],
-                                    reverse=self.maximise)
+                                    reverse=self.maximize)
 
                 best_params, best_fitness = self.__get_best_individual(population)
 

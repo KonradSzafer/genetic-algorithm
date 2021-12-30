@@ -16,7 +16,7 @@ if __name__ == '__main__':
                             population_count=200,
                             function=function,
                             params_bounds=bounds,
-                            maximise=False,
+                            maximize=False,
                             floating_point=True,
                             stochastic=False,
                             stochastic_iterations=3,

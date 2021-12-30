@@ -15,7 +15,7 @@ GeneticAlgorithm = GA(  generations_count=100,   # number of simulated generatio
                         population_count=200,    # number of population in generation
                         function=function,       # function to optimize
                         params_bounds=bounds,    # variable bounds for each argument
-                        maximise=False,          # decide to optimize values for minimising or maximising function output
+                        maximize=False,          # decide to optimize values for minimizing or maximizing function output
                         floating_point=True,     # variables data type
                         stochastic=False,        # set True if function to optimize have stochastic nature
                         stochastic_iterations=3, # if function to optimize have stochastic nature, performs multiple calculations for every individual (>=3)
