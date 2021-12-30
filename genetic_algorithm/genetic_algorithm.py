@@ -198,16 +198,16 @@ class GA:
 
                 self.__reproduce_population(population)
 
-                if self.linux:
-                    os.system('clear')
-                else:
-                    os.system('cls')
+                if verbose:
+                    if self.linux:
+                        os.system('clear')
+                    else:
+                        os.system('cls')
 
-                # progress.print('Generation:', generation+1, '/', self.generations_count)
-                # self.__print_population(population)
-                print('Generation:', generation+1, '/', self.generations_count)
-                print('\nBest params:', best_params)
-                print('fitness:', best_fitness, end='\n\n')
+                    # progress.print('Generation:', generation+1, '/', self.generations_count)
+                    print('Generation:', generation+1, '/', self.generations_count)
+                    print('\nBest params:', best_params)
+                    print('fitness:', best_fitness, end='\n\n')
 
         end_time = time.time()
         self.evolution_time = end_time - start_time
