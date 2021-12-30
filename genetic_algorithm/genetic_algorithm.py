@@ -21,8 +21,8 @@ class GA:
                 maximise: bool = False,
                 floating_point: bool = False,
                 stochastic: bool = False,
-                complex_function: bool = False,
                 stochastic_iterations: int = 3,
+                complex_function: bool = False,
                 crossover_percentage: float = 0.3,
                 mutation_percentage: float = 0.7) -> None:
 
