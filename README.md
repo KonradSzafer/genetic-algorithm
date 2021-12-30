@@ -1,5 +1,11 @@
 # genetic-algorithm
 
+## Description
+
+This is Genetic Algorithm implementation, written in Python.
+The goal is to create a genetic algorithm that is quick to implement and easy to use.
+This implementation introduces several new features that I came up with while working with it, such as support for stochastic problems and new types offspring creation.
+
 ## Documentation
 
 ### Instance initialization
