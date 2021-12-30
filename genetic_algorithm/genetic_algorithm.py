@@ -19,7 +19,7 @@ class GA:
                 params_bounds: Dict[str,List],
                 fitness_treshold: int = None,
                 maximize: bool = False,
-                floating_point: bool = False,
+                floating_point: bool = True,
                 stochastic: bool = False,
                 stochastic_iterations: int = 3,
                 complex_function: bool = False,
@@ -49,6 +49,7 @@ class GA:
         self.complex_function = complex_function
         self.crossover_percentage = crossover_percentage
         self.mutation_percentage = mutation_percentage
+        self.offspring_attempts = 3
 
         self.linux = True
         if os.name == 'nt':
@@ -73,6 +74,13 @@ class GA:
         total_percentage = crossover_percentage + mutation_percentage
         if total_percentage > 1:
             raise ValueError('The values assigned to crossover_percentage and mutation_percentage are too large.')
+
+
+    def __was_searched(self, solution: List) -> bool:
+        if self.complex_function:
+            if tuple(solution) in self.searched:
+                return True
+        return False
 
 
     def __print_population(self, population: List) -> List:
@@ -113,7 +121,7 @@ class GA:
                     if individual_fitness < self.fitness_treshold:
                         self.treshold_reached =  True
 
-            self.searched.add(tuple(individual + [individual_fitness]))
+            self.searched.add(tuple(individual))
             population[idx][-1] = individual_fitness
 
 
@@ -147,6 +155,12 @@ class GA:
                                     parent_b,
                                     floating_point=self.floating_point)
 
+            if self.__was_searched(offspring):
+                for _ in range(self.offspring_attempts):
+                    offspring = creation(self.parameters_bounds, floating_point=self.floating_point)
+                    if not self.__was_searched(offspring):
+                        break
+
             offspring.append(np.nan)
             population[i] = offspring
 
@@ -159,6 +173,12 @@ class GA:
                                 best_individual,
                                 floating_point=self.floating_point)
 
+            if self.__was_searched(offspring):
+                for _ in range(self.offspring_attempts):
+                    offspring = creation(self.parameters_bounds, floating_point=self.floating_point)
+                    if not self.__was_searched(offspring):
+                        break
+
             offspring.append(np.nan)
             population[i] = offspring
 
@@ -167,7 +187,10 @@ class GA:
         end = self.population_count
         for i in range(start, end):
 
-            offspring = creation(self.parameters_bounds, floating_point=self.floating_point)
+            for _ in range(self.offspring_attempts + 1):
+                offspring = creation(self.parameters_bounds, floating_point=self.floating_point)
+                if not self.__was_searched(offspring):
+                    break
 
             offspring.append(np.nan)
             population[i] = offspring
@@ -234,11 +257,8 @@ class GA:
         return self.fitness_array
 
 
-    def get_searched_list(self, include_fitness: bool = False) -> List:
+    def get_searched_list(self) -> List:
 
         searched_list = list(self.searched.copy())
         searched_list = [list(solution) for solution in searched_list]
-        if not include_fitness:
-            for i in searched_list:
-                searched_list.pop()
         return searched_list

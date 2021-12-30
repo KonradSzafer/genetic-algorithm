@@ -19,6 +19,7 @@ GeneticAlgorithm = GA(  generations_count=100,   # number of simulated generatio
                         floating_point=True,     # variables data type
                         stochastic=False,        # set True if function to optimize have stochastic nature
                         stochastic_iterations=3, # if function to optimize have stochastic nature, performs multiple calculations for every individual (>=3)
+                        complex_function=False,  # set True if function to optimize is computationally complex and when search space is relatively small
                         crossover_percentage=0.3,# percentage of population reproduced by crossover
                         mutation_percentage=0.7  # percentage of population reproduced by mutation
                         )
@@ -53,7 +54,6 @@ GeneticAlgorithm.get_learning_curve()
 Returns fitness array.
 
 ```python
-GeneticAlgorithm.get_searched_list( include_fitness = False )
+GeneticAlgorithm.get_searched_list()
 ```
 Returns list of searched solutions.
-If include_fitness = True, the last element of solution is its fitness.

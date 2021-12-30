@@ -20,7 +20,7 @@ if __name__ == '__main__':
                             floating_point=True,
                             stochastic=False,
                             stochastic_iterations=3,
-                            complex_function=False,
+                            complex_function=True,
                             crossover_percentage=0.3,
                             mutation_percentage=0.7 )
 
