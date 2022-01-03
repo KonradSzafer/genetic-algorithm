@@ -70,7 +70,9 @@ class GA:
                 raise ValueError('Incorrect format of parameter bounds.')
 
         if self.initial_population is not None:
+
             self.initial_population_count = len(initial_population)
+            self.population_count -= self.initial_population_count
 
             if len(self.initial_population) > self.population_count:
                 raise ValueError('Initial population is bigger than defined population count.')
@@ -122,10 +124,15 @@ class GA:
 
     def __create_population(self) -> List:
         population = []
+
         for _ in range(self.population_count):
             individual = creation(self.parameters_bounds, floating_point=self.floating_point)
             individual.append(np.nan)
             population.append(individual)
+
+        if self.initial_population is not None:
+            population += self.initial_population
+
         return population
 
 
