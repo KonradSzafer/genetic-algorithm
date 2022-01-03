@@ -17,6 +17,7 @@ class GA:
                 population_count: int,
                 function: Callable,
                 params_bounds: Dict[str,List],
+                initial_population: List[List] = None,
                 fitness_threshold: int = None,
                 maximize: bool = False,
                 floating_point: bool = True,
@@ -32,6 +33,7 @@ class GA:
         self.function = function
         self.parameters_bounds = params_bounds
         self.parameters_count = len(params_bounds)
+        self.initial_population = initial_population
         self.fitness_threshold = fitness_threshold
         self.treshold_reached = False
 
@@ -66,6 +68,33 @@ class GA:
             min_val, max_val = bounds
             if min_val >= max_val:
                 raise ValueError('Incorrect format of parameter bounds.')
+
+        if self.initial_population is not None:
+            self.initial_population_count = len(initial_population)
+
+            if len(self.initial_population) > self.population_count:
+                raise ValueError('Initial population is bigger than defined population count.')
+
+            for individual in self.initial_population:
+                if len(individual) is not self.parameters_count:
+                    raise ValueError('Individual parameters count is incorrect.')
+
+                idx = 0
+                for name, bounds in self.parameters_bounds.items():
+                    min_val, max_val = bounds
+                    param = individual[idx]
+
+                    if not isinstance(param, int):
+                        if self.floating_point:
+                            if not isinstance(param, float):
+                                raise ValueError('Initial population parameters must be of floating point or integer type.')
+                        else:
+                            raise ValueError('Initial population parameters must be of integer type.')
+
+                    if not min_val <= param <= max_val:
+                        raise ValueError('Parameter of individual is outside the bounds.')
+                    idx += 1
+                individual.append(np.nan)
 
         if self.stochastic:
             if self.stochastic_iterations < 3:

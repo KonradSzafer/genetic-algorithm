@@ -12,10 +12,15 @@ if __name__ == '__main__':
                     'y': [-30, 30],
                     'z': [0, 50] }
 
+    initial_pop = [ [5, 10, 3],
+                    [-3, 24, 32],
+                    [9, 0, 0]]
+
     GeneticAlgorithm = GA(  generations_count=100,
                             population_count=200,
                             function=function,
                             params_bounds=bounds,
+                            initial_population=initial_pop,
                             fitness_threshold=None,
                             maximize=False,
                             floating_point=True,
