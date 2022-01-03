@@ -29,10 +29,10 @@ GeneticAlgorithm = GA(  generations_count=100,   # number of simulated generatio
 ### Methods
 
 ```python
-GeneticAlgorithm.evolve( verbose = True )
+GeneticAlgorithm.evolve( verbose = 1 )
 ```
 Runs a solution search.
-If verbose = True, the progress will be displayed in console.
+Verbosity mode. 0 = progress bar, 1 = generation number and best stats, 2 = adds console clear between generations.
 
 ```python
 GeneticAlgorithm.get_best()

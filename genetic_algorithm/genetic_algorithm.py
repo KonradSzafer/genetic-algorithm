@@ -232,7 +232,7 @@ class GA:
             population[i] = offspring
 
 
-    def evolve(self, stop_value = None, verbose: bool = True) -> None:
+    def evolve(self, stop_value = None, verbose: int = 1) -> None:
 
         start_time = time.time()
         population = self.__create_population()
@@ -257,16 +257,19 @@ class GA:
 
                 self.__reproduce_population(population)
 
-                if verbose:
-                    if self.linux:
-                        os.system('clear')
-                    else:
-                        os.system('cls')
+                if verbose > 0:
+                    if verbose > 1:
+                        if self.linux:
+                            os.system('clear')
+                        else:
+                            os.system('cls')
 
-                    # progress.print('Generation:', generation+1, '/', self.generations_count)
-                    print('Generation:', generation+1, '/', self.generations_count)
-                    print('\nBest params:', best_params)
-                    print('fitness:', best_fitness, end='\n\n')
+                    learning_stats = 'Generation: [green]{0}[/green]/[green]{1}[/green]\nBest params: {2}\nBest fitness: {3}\n'
+
+                    learning_stats = learning_stats.format( generation+1, self.generations_count,
+                                                            best_params, best_fitness)
+
+                    progress.print(learning_stats)
 
         end_time = time.time()
         self.evolution_time = end_time - start_time

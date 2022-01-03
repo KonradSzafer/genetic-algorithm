@@ -30,7 +30,7 @@ if __name__ == '__main__':
                             crossover_percentage=0.3,
                             mutation_percentage=0.7 )
 
-    GeneticAlgorithm.evolve( verbose=True )
+    GeneticAlgorithm.evolve( verbose=2 )
 
     result = GeneticAlgorithm.get_best()
     print('\nResult', result)
