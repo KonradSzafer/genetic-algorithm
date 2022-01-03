@@ -17,7 +17,7 @@ class GA:
                 population_count: int,
                 function: Callable,
                 params_bounds: Dict[str,List],
-                fitness_treshold: int = None,
+                fitness_threshold: int = None,
                 maximize: bool = False,
                 floating_point: bool = True,
                 stochastic: bool = False,
@@ -32,7 +32,7 @@ class GA:
         self.function = function
         self.parameters_bounds = params_bounds
         self.parameters_count = len(params_bounds)
-        self.fitness_treshold = fitness_treshold
+        self.fitness_threshold = fitness_threshold
         self.treshold_reached = False
 
         for name, bounds in self.parameters_bounds.items():
@@ -113,12 +113,12 @@ class GA:
             else:
                 individual_fitness = self.function( *individual )
 
-            if self.fitness_treshold is not None:
+            if self.fitness_threshold is not None:
                 if self.maximize:
-                    if individual_fitness > self.fitness_treshold:
+                    if individual_fitness > self.fitness_threshold:
                         self.treshold_reached =  True
                 else:
-                    if individual_fitness < self.fitness_treshold:
+                    if individual_fitness < self.fitness_threshold:
                         self.treshold_reached =  True
 
             self.searched.add(tuple(individual))
