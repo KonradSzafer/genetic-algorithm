@@ -3,6 +3,7 @@ import time
 import random
 import numpy as np
 import numpy.typing as npt
+import matplotlib.pyplot as plt
 from typing import Union, Callable, List, Dict
 
 from rich.table import Column
@@ -291,7 +292,27 @@ class GA:
         return self.evolution_time
 
 
-    def get_learning_curve(self) -> List:
+    def plot_learning_curve(self,
+                            title: str = 'Fitness over generations',
+                            xlabel: str = 'Generation',
+                            ylabel: str = 'Fitness',
+                            font_size: int = 12,
+                            line_width: int = 2,
+                            save_dir: str = None,
+                            image_name: str = 'learning_curve.png',
+                            ) -> List:
+
+        if len(self.fitness_array) < 1:
+            raise RuntimeError('plot_learning_curve() method can be called only for number of generations > 1')
+
+        plt.plot(self.fitness_array, linewidth=line_width)
+        plt.title(title, fontsize=font_size)
+        plt.xlabel(xlabel, fontsize=font_size)
+        plt.ylabel(ylabel, fontsize=font_size)
+        plt.show()
+
+        if save_dir is not None:
+            plt.savefig(save_dir + image_name)
 
         return self.fitness_array
 

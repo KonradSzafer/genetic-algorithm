@@ -50,9 +50,16 @@ GeneticAlgorithm.get_evolution_time()
 Returns searching time in seconds.
 
 ```python
-GeneticAlgorithm.get_learning_curve()
+GeneticAlgorithm.plot_learning_curve(   title = 'Fitness over generations',
+                                        xlabel = 'Generation',
+                                        ylabel = 'Fitness',
+                                        font_size = 12,
+                                        line_width = 2,
+                                        save_dir = None,
+                                        image_name = 'learning_curve.png')
 ```
-Returns fitness array.
+Plots learning curve and returns fitness array.
+if save_dir is None, the image will not be saved.
 
 ```python
 GeneticAlgorithm.get_searched_list()

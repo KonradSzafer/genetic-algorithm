@@ -41,9 +41,7 @@ if __name__ == '__main__':
     optymalization_time = GeneticAlgorithm.get_evolution_time()
     print('Optymalization time:', optymalization_time, 's\n')
 
-    learning_curve = GeneticAlgorithm.get_learning_curve()
-    plt.plot(learning_curve)
-    plt.show()
+    learning_curve = GeneticAlgorithm.plot_learning_curve()
 
     # searched_list = GeneticAlgorithm.get_searched_list()
     # fig = plt.figure()
