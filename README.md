@@ -20,7 +20,7 @@ GeneticAlgorithm = GA(  generations_count=100,   # number of simulated generatio
                         floating_point=True,     # variables data type
                         stochastic=False,        # set True if function to optimize have stochastic nature
                         stochastic_iterations=3, # if function to optimize have stochastic nature, performs multiple calculations for every individual (>=3)
-                        complex_function=False,  # set True if function to optimize is computationally complex and when search space is relatively small
+                        allow_gene_duplication=True, # allows the same genes to be calculated several times
                         crossover_percentage=0.3,# percentage of population reproduced by crossover
                         mutation_percentage=0.7  # percentage of population reproduced by mutation
                         )

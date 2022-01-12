@@ -24,7 +24,7 @@ class GA:
                 floating_point: bool = True,
                 stochastic: bool = False,
                 stochastic_iterations: int = 3,
-                complex_function: bool = False,
+                allow_gene_duplication: bool = True,
                 crossover_percentage: float = 0.3,
                 mutation_percentage: float = 0.7) -> None:
 
@@ -49,7 +49,7 @@ class GA:
         self.floating_point = floating_point
         self.stochastic = stochastic
         self.stochastic_iterations = stochastic_iterations
-        self.complex_function = complex_function
+        self.allow_gene_duplication = allow_gene_duplication
         self.crossover_percentage = crossover_percentage
         self.mutation_percentage = mutation_percentage
         self.offspring_attempts = 3
@@ -109,7 +109,7 @@ class GA:
 
 
     def __was_searched(self, solution: List) -> bool:
-        if self.complex_function:
+        if not self.allow_gene_duplication:
             if tuple(solution) in self.searched:
                 return True
         return False
