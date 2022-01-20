@@ -128,6 +128,10 @@ class GA:
 
         for _ in range(self.population_count):
             individual = creation(self.parameters_bounds, floating_point=self.floating_point)
+
+            # TODO add was searched
+            # and recreate if duplicated genes
+
             individual.append(np.nan)
             population.append(individual)
 
