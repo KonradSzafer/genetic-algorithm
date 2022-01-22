@@ -165,7 +165,7 @@ class GA:
                     if individual_fitness < self.fitness_threshold:
                         self.treshold_reached =  True
 
-            if self.allow_gene_duplication:
+            if not self.allow_gene_duplication:
                 # searched dont include fittnes
                 self.searched.add(tuple(individual))
 
