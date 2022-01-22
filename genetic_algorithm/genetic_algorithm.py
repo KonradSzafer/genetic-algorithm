@@ -128,11 +128,12 @@ class GA:
 
         for _ in range(self.population_count):
             individual = creation(self.parameters_bounds, floating_point=self.floating_point)
-            if individual in population:
-                for _ in range(self.offspring_attempts):
-                    individual = creation(self.parameters_bounds, floating_point=self.floating_point)
-                    if individual not in population:
-                        break
+            if not self.allow_gene_duplication:
+                if individual in population:
+                    for _ in range(self.offspring_attempts):
+                        individual = creation(self.parameters_bounds, floating_point=self.floating_point)
+                        if individual not in population:
+                            break
 
             individual.append(np.nan)
             population.append(individual)
@@ -164,7 +165,10 @@ class GA:
                     if individual_fitness < self.fitness_threshold:
                         self.treshold_reached =  True
 
-            self.searched.add(tuple(individual))
+            if self.allow_gene_duplication:
+                # searched dont include fittnes
+                self.searched.add(tuple(individual))
+
             population[idx][-1] = individual_fitness
 
 

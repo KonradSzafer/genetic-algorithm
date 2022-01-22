@@ -26,7 +26,7 @@ if __name__ == '__main__':
                             floating_point=True,
                             stochastic=False,
                             stochastic_iterations=3,
-                            allow_gene_duplication=False,
+                            allow_gene_duplication=True,
                             crossover_percentage=0.3,
                             mutation_percentage=0.7 )
 
