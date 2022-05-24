@@ -287,17 +287,14 @@ class GA:
 
 
     def get_best(self) -> List:
-
         return self.best_individual
 
 
     def get_best_fitness(self) -> float:
-
         return self.fitness_array[-1]
 
 
     def get_evolution_time(self) -> float:
-
         return self.evolution_time
 
 
@@ -327,7 +324,10 @@ class GA:
 
 
     def get_searched_list(self) -> List:
-
+        if self.allow_gene_duplication:
+            raise RuntimeError(
+                'Searched list is not collected with allow_gene_duplication=True'
+            )
         searched_list = list(self.searched.copy())
         searched_list = [list(solution) for solution in searched_list]
         return searched_list
