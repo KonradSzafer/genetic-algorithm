@@ -5,11 +5,10 @@ import numpy as np
 import numpy.typing as npt
 import matplotlib.pyplot as plt
 from typing import Union, Callable, List, Dict
-
 from rich.table import Column
 from rich.progress import Progress, BarColumn, TextColumn
+from genetic_algorithm.reproduction import creation, mutation, crossover
 
-from reproduction import creation, mutation, crossover
 
 class GA:
 

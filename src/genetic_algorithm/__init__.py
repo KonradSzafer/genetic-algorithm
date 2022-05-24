@@ -1,1 +1,1 @@
-from genetic_algorithm import GA
+from .genetic_algorithm import GA
