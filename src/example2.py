@@ -31,26 +31,29 @@ def function(w0, w1, w2, w3, w4, w5, w6):
 if __name__ == '__main__':
 
     bounds = {
-                'w0': [-1, 1],
-                'w1': [-1, 1],
-                'w2': [-1, 1],
-                'w3': [-1, 1],
-                'w4': [-1, 1],
-                'w5': [-1, 1],
-                'w6': [0, 1]}
+        'w0': [-1, 1],
+        'w1': [-1, 1],
+        'w2': [-1, 1],
+        'w3': [-1, 1],
+        'w4': [-1, 1],
+        'w5': [-1, 1],
+        'w6': [0, 1]
+    }
 
-    GeneticAlgorithm = GA(  generations_count=1000,
-                            population_count=1000,
-                            function=function,
-                            params_bounds=bounds,
-                            fitness_threshold=None,
-                            maximize=False,
-                            floating_point=True,
-                            stochastic=False,
-                            stochastic_iterations=3,
-                            allow_gene_duplication=True,
-                            crossover_percentage=0.2,
-                            mutation_percentage=0.6 )
+    GeneticAlgorithm = GA(
+        generations_count=1000,
+        population_count=1000,
+        function=function,
+        params_bounds=bounds,
+        fitness_threshold=None,
+        maximize=False,
+        floating_point=True,
+        stochastic=False,
+        stochastic_iterations=3,
+        allow_gene_duplication=True,
+        crossover_percentage=0.2,
+        mutation_percentage=0.6
+    )
 
     GeneticAlgorithm.evolve( verbose=0 )
 

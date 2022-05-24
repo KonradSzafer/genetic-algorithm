@@ -18,19 +18,21 @@ if __name__ == '__main__':
                     [-3, 24, 32],
                     [9, 0, 0]]
 
-    GeneticAlgorithm = GA(  generations_count=10,
-                            population_count=20,
-                            function=function,
-                            params_bounds=bounds,
-                            initial_population=initial_pop,
-                            fitness_threshold=None,
-                            maximize=False,
-                            floating_point=True,
-                            stochastic=False,
-                            stochastic_iterations=3,
-                            allow_gene_duplication=False,
-                            crossover_percentage=0.3,
-                            mutation_percentage=0.7 )
+    GeneticAlgorithm = GA(
+        generations_count=10,
+        population_count=20,
+        function=function,
+        params_bounds=bounds,
+        initial_population=initial_pop,
+        fitness_threshold=None,
+        maximize=False,
+        floating_point=True,
+        stochastic=False,
+        stochastic_iterations=3,
+        allow_gene_duplication=False,
+        crossover_percentage=0.3,
+        mutation_percentage=0.7
+    )
 
     GeneticAlgorithm.evolve( verbose=2 )
 

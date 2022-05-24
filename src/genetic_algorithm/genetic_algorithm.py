@@ -12,20 +12,22 @@ from genetic_algorithm.reproduction import creation, mutation, crossover
 
 class GA:
 
-    def __init__(self,
-                generations_count: int,
-                population_count: int,
-                function: Callable,
-                params_bounds: Dict[str,List],
-                initial_population: List[List] = None,
-                fitness_threshold: int = None,
-                maximize: bool = False,
-                floating_point: bool = True,
-                stochastic: bool = False,
-                stochastic_iterations: int = 3,
-                allow_gene_duplication: bool = True,
-                crossover_percentage: float = 0.3,
-                mutation_percentage: float = 0.7) -> None:
+    def __init__(
+        self,
+        generations_count: int,
+        population_count: int,
+        function: Callable,
+        params_bounds: Dict[str,List],
+        initial_population: List[List] = None,
+        fitness_threshold: int = None,
+        maximize: bool = False,
+        floating_point: bool = True,
+        stochastic: bool = False,
+        stochastic_iterations: int = 3,
+        allow_gene_duplication: bool = True,
+        crossover_percentage: float = 0.3,
+        mutation_percentage: float = 0.7
+    ) -> None:
 
         # general
         self.generations_count = generations_count
@@ -123,8 +125,8 @@ class GA:
 
 
     def __create_population(self) -> List:
-        population = []
 
+        population = []
         for _ in range(self.population_count):
             individual = creation(self.parameters_bounds, floating_point=self.floating_point)
             if not self.allow_gene_duplication:
@@ -298,15 +300,16 @@ class GA:
         return self.evolution_time
 
 
-    def plot_learning_curve(self,
-                            title: str = 'Fitness over generations',
-                            xlabel: str = 'Generation',
-                            ylabel: str = 'Fitness',
-                            font_size: int = 12,
-                            line_width: int = 2,
-                            save_dir: str = None,
-                            image_name: str = 'learning_curve.png',
-                            ) -> List:
+    def plot_learning_curve(
+        self,
+        title: str = 'Fitness over generations',
+        xlabel: str = 'Generation',
+        ylabel: str = 'Fitness',
+        font_size: int = 12,
+        line_width: int = 2,
+        save_dir: str = None,
+        image_name: str = 'learning_curve.png',
+    ) -> List:
 
         if len(self.fitness_array) < 1:
             raise RuntimeError('plot_learning_curve() method can be called only for number of generations > 1')
@@ -326,7 +329,7 @@ class GA:
     def get_searched_list(self) -> List:
         if self.allow_gene_duplication:
             raise RuntimeError(
-                'Searched list is not collected with allow_gene_duplication=True'
+                'Search list is not collected when allow_gene_duplication=True.'
             )
         searched_list = list(self.searched.copy())
         searched_list = [list(solution) for solution in searched_list]

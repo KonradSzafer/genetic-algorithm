@@ -35,18 +35,20 @@ if __name__ == '__main__':
             'x': [-10, 10],
             'y': [-100, 100]}
 
-    GeneticAlgorithm = GA(  generations_count=15,
-                            population_count=15,
-                            function=rosenbrock_function,
-                            params_bounds=bounds,
-                            fitness_threshold=None,
-                            maximize=False,
-                            floating_point=True,
-                            stochastic=False,
-                            stochastic_iterations=3,
-                            allow_gene_duplication=False,
-                            crossover_percentage=0.3,
-                            mutation_percentage=0.7 )
+    GeneticAlgorithm = GA(
+        generations_count=15,
+        population_count=15,
+        function=rosenbrock_function,
+        params_bounds=bounds,
+        fitness_threshold=None,
+        maximize=False,
+        floating_point=True,
+        stochastic=False,
+        stochastic_iterations=3,
+        allow_gene_duplication=False,
+        crossover_percentage=0.3,
+        mutation_percentage=0.7
+    )
 
     GeneticAlgorithm.evolve( verbose=True )
 
@@ -65,11 +67,13 @@ if __name__ == '__main__':
 
     fig = plt.figure()
     ax = plt.axes(projection='3d')
-    ax.plot_surface(X, Y, Z,
-                    rstride=1,
-                    cstride=1,
-                    cmap='winter',
-                    edgecolor='none')
+    ax.plot_surface(
+        X, Y, Z,
+        rstride=1,
+        cstride=1,
+        cmap='winter',
+        edgecolor='none'
+    )
 
     for i in searched_list:
         ax.scatter(
