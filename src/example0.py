@@ -31,18 +31,20 @@ if __name__ == '__main__':
     Z = rosenbrock_function(X, Y)
 
     # Genetic Algorithm
-    params_ranges = {
-                    'x': (-10, 10),
-                    'y': (-100, 100)}
+    bounds = {
+            'x': [-10, 10],
+            'y': [-100, 100]}
 
     GeneticAlgorithm = GA(  generations_count=15,
                             population_count=15,
                             function=rosenbrock_function,
-                            parameters_ranges=params_ranges,
-                            maximise=False,
+                            params_bounds=bounds,
+                            fitness_threshold=None,
+                            maximize=False,
                             floating_point=True,
                             stochastic=False,
                             stochastic_iterations=3,
+                            allow_gene_duplication=False,
                             crossover_percentage=0.3,
                             mutation_percentage=0.7 )
 
@@ -52,21 +54,17 @@ if __name__ == '__main__':
     print('\nResult', result)
 
     best_fitness = GeneticAlgorithm.get_best_fitness()
-    print('Best fitness', best_fitness)
+    print('Best fitness:', best_fitness)
 
     optymalization_time = GeneticAlgorithm.get_evolution_time()
     print('Optymalization time:', optymalization_time, 's\n')
 
-    learning_curve = GeneticAlgorithm.get_learning_curve()
-    plt.plot(learning_curve)
-    plt.show()
+    learning_curve = GeneticAlgorithm.plot_learning_curve()
 
-    searched_list = GeneticAlgorithm.get_searched_list(include_fitness=True)
+    searched_list = GeneticAlgorithm.get_searched_list()
 
-    # Plot
     fig = plt.figure()
     ax = plt.axes(projection='3d')
-
     ax.plot_surface(X, Y, Z,
                     rstride=1,
                     cstride=1,
@@ -74,8 +72,12 @@ if __name__ == '__main__':
                     edgecolor='none')
 
     for i in searched_list:
-        ax.scatter(i[0], i[1], i[2], color='black')
-
+        ax.scatter(
+            i[0],
+            i[1],
+            rosenbrock_function(i[0],i[1]),
+            color='orange'
+        )
     ax.scatter(result[0], result[1], best_fitness, s=100, color='red')
 
     ax.set_xlabel('x')
