@@ -11,12 +11,6 @@ def rosenbrock_function(x, y):
     return z
 
 
-def rosenbrock_function_scipy(xy):
-    a, b = 1, 100
-    z = (a - xy[0])**2 + b*(xy[1] - xy[0]**2)**2
-    return z
-
-
 if __name__ == '__main__':
 
     x_min, x_max = -10, 10
@@ -71,6 +65,7 @@ if __name__ == '__main__':
         X, Y, Z,
         rstride=1,
         cstride=1,
+        alpha=0.3,
         cmap='winter',
         edgecolor='none'
     )

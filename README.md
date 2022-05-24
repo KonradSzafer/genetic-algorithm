@@ -71,3 +71,17 @@ Returns a list of searched solutions, only if allow_gene_duplication=False.
 
 ## Examples
 
+### Example 0
+
+A test of a genetic algorithm on a popular optimization problem, the Rosenbrock function.
+The script runs a basic optimization using a relatively small population and number of generations.
+
+Sample learning curve:
+<p align="center">
+    <img src="img/learning_curve.png" alt="drawing" width="400"/>
+</p>
+
+After the evolution is complete, the searched solutions are plotted on the function plane. The best solution is marked as a big red dot.
+<p align="center">
+    <img src="img/rosenbrock_plane.png" alt="drawing" width="400"/>
+</p>
